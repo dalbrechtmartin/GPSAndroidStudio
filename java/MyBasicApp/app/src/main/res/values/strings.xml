@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MyFirstJavaApp</string>
+    <string name="add">Add</string>
+    <string name="subtract">Subtract</string>
+    <string name="show_toast">Show Toast</string>
+    <string name="show_snackBar">Show SnackBar</string>
+    <string name="open_activity1">Open Activity1</string>
+    <string name="open_thirdActivity">Open Activity3</string>
+</resources>

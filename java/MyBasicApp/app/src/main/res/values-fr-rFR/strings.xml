@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ma premiere Application</string>
+    <string name="add">Ajouter</string>
+    <string name="subtract">Soustraire</string>
+</resources>
