@@ -3,7 +3,9 @@ package com.students.myfirstgpsapp;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -12,6 +14,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -113,22 +117,53 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     // TODO 7) override method onNavigationItemSelected
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
         int id = item.getItemId();
-        if (id == R.id.activity_main_start_new_path) {
-            // code ici
-        } else if (id == R.id.activity_main_exit) {
+
+        if (id == R.id.activity_main_exit) {
             finish();
+        } else if (id == R.id.activity_main_start_new_path) {
+            askPathNameBeforeCreating();
         }
 
-        this.drawerLayout.closeDrawer(GravityCompat.START);
+        this.drawerLayout.closeDrawer(GravityCompat.START); // ferme le drawer
         return true;
     }
 
-
     // TODO 16) call method askPathNameBeforeCreating on click start new path
-
     private void askPathNameBeforeCreating() {
-        // TODO 17) create an AlertDialog
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        alertDialog.setTitle("Path name");
+        alertDialog.setMessage("Enter Path Name");
+        final EditText input = new EditText(MainActivity.this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lp);
+        alertDialog.setView(input);
+        alertDialog.setIcon(android.R.drawable.ic_menu_save);
+        alertDialog.setPositiveButton("YES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String name = input.getText().toString();
+                        Log.i(LOG_TAG, "alertDialog >answer YES" + name);
+                        long id = m_gpsPathDbHelper.addPathEntry(name);
+                        m_currentPath = new GpsPath(id, name);
+                        m_gpsPathDbHelper.createTablePoint(m_currentPath.getGpsPointTableName());
+                        m_newPathStarted = true;
+                        // Update Menu
+                        MainActivity.this.navigationView.getMenu().clear();
+                        MainActivity.this.navigationView.inflateMenu(R.menu.activity_main_menu_recording_drawer);
+                    }
+                });
+        alertDialog.setNegativeButton("NO",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+        alertDialog.show();
     }
 
     // TODO override onActivityResult
@@ -178,6 +213,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                         //Request location updates:
                         // TODO 13) using locationManager, call method requestLocationUpdates to get notified of location updates
+                        m_locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 5, this);
                     }
 
                 } else {
