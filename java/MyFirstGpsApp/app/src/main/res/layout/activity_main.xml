@@ -55,12 +55,26 @@
                     android:textSize="20sp" />
             </LinearLayout>
 
-            <!-- TODO 7) add a fragment here to manage Google Map Display -->
+            <!-- TODO 8) add a fragment here to manage Google Map Display -->
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".MapsActivity" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <!-- TODO 4) Add the NavigationView here -->
+    <!-- TODO 3) Add the NavigationView here -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/activity_main_nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/activity_main_nav_header"
+        app:menu="@menu/activity_main_menu_idle_drawer"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

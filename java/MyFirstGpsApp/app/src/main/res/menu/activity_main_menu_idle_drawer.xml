@@ -4,5 +4,22 @@
     tools:showIn="navigation_view">
 
     <!-- TODO 6) add the header layout of Navigation Menu Drawer here -->
-
+    <group>
+        <item
+            android:id="@+id/activity_main_start_new_path"
+            android:icon="@android:drawable/ic_menu_add"
+            android:title="@string/start_new_course" />
+        <item
+            android:id="@+id/activity_main_show_all_path"
+            android:icon="@android:drawable/ic_menu_add"
+            android:title="@string/show_courses" />
+    </group>
+    <item android:title="@string/configuration">
+        <menu>
+            <item
+                android:id="@+id/activity_main_exit"
+                android:icon="@android:drawable/ic_menu_close_clear_cancel"
+                android:title="@string/exit"/>
+        </menu>
+    </item>
 </menu>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="distanceDone">Distance parcourue :</string>
+    <string name="start_new_course">Démarrer nouveau Parcours</string>
+    <string name="show_courses">Montrer les Parcours</string>
+    <string name="configuration">Configuration</string>
+    <string name="app_name">MaPremièreAppGps</string>
+    <string name="navigation_drawer_open">Ouvrir la navigation</string>
+    <string name="navigation_drawer_close">Fermer la navigation</string>
+    <string name="exit">Quitter</string>
+</resources>
